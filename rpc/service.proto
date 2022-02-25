@@ -20,12 +20,14 @@ message GetUserRes {
   string userID = 1;
   string email = 2;
   string username = 3;
+  string teamID = 4;
 }
 
 message UpdateUserReq {
   string userID = 1;
   string email = 2;
   string username = 3;
+  string teamID = 4;
 }
 
 message UpdateUserRes {}
@@ -47,4 +49,3 @@ message UpdateTeamReq {
 }
 
 message UpdateTeamRes {}
-
