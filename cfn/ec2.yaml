@@ -77,10 +77,10 @@ Resources:
         - AttributeName: "username"
           AttributeType: "S"
       KeySchema:
-        - AttributeName: "username"
-          KeyType: "range"
         - AttributeName: "email"
           KeyType: "HASH"
+        - AttributeName: "username"
+          KeyType: "RANGE"
       ProvisionedThroughput:
         ReadCapacityUnits: !Ref 'ReadCapacityUnits'
         WriteCapacityUnits: !Ref 'WriteCapacityUnits'
@@ -99,14 +99,14 @@ Resources:
     Properties:
       TableName: "Teams"
       AttributeDefinitions:
-        - AttributeName: "TeamID"
+        - AttributeName: "teamID"
           AttributeType: "S"
-        - AttributeName: "TeamName"
+        - AttributeName: "teamName"
           AttributeType: "S"
       KeySchema:
-        - AttributeName: "TeamID"
+        - AttributeName: "teamID"
           KeyType: "HASH"
-        - AttributeName: "TeamName"
+        - AttributeName: "teamName"
           KeyType: "RANGE"
       ProvisionedThroughput:
         ReadCapacityUnits: !Ref 'ReadCapacityUnits'
@@ -124,9 +124,9 @@ Outputs:
   # PublicIP:
   #   Description: Public IP address of the newly created EC2 instance
   #   Value: !GetAtt [EC2Instance, PublicIp]
-  TableName:
+  User:
     Value: !Ref 'userTable'
     Description: Table name of the newly created DynamoDB table
-  TableName:
+  Teams:
     Value: !Ref 'teamTable'
     Description: Table name of the newly created DynamoDB table

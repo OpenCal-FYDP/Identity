@@ -12,20 +12,17 @@ service IdentityService {
 }
 
 message GetUserReq {
-  string userID = 1;
-  string email = 2;
-  string username = 3;
+  string email = 1;
+  string username = 2;
 }
 message GetUserRes {
-  string userID = 1;
-  string email = 2;
-  string username = 3;
+  string email = 1;
+  string username = 2;
 }
 
 message UpdateUserReq {
-  string userID = 1;
-  string email = 2;
-  string username = 3;
+  string email = 1;
+  string username = 2;
 }
 
 message UpdateUserRes {}
