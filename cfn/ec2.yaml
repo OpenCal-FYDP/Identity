@@ -72,17 +72,15 @@ Resources:
     Properties:
       TableName: "User"
       AttributeDefinitions:
-        - AttributeName: "userID"
-          AttributeType: "S"
         - AttributeName: "email"
           AttributeType: "S"
         - AttributeName: "username"
           AttributeType: "S"
       KeySchema:
-        - AttributeName: "userID"
-          KeyType: "HASH"
+        - AttributeName: "username"
+          KeyType: "range"
         - AttributeName: "email"
-          KeyType: "RANGE"
+          KeyType: "HASH"
       ProvisionedThroughput:
         ReadCapacityUnits: !Ref 'ReadCapacityUnits'
         WriteCapacityUnits: !Ref 'WriteCapacityUnits'
