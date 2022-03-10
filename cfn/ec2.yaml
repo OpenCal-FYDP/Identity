@@ -301,13 +301,9 @@ Resources:
       AttributeDefinitions:
         - AttributeName: "teamID"
           AttributeType: "S"
-        - AttributeName: "teamName"
-          AttributeType: "S"
       KeySchema:
         - AttributeName: "teamID"
           KeyType: "HASH"
-        - AttributeName: "teamName"
-          KeyType: "RANGE"
       ProvisionedThroughput:
         ReadCapacityUnits: !Ref 'ReadCapacityUnits'
         WriteCapacityUnits: !Ref 'WriteCapacityUnits'

@@ -33,7 +33,6 @@ message UpdateUserRes {}
 
 message GetTeamReq {
   string teamID = 1;
-  string teamName = 2;
 }
 message GetTeamRes {
   string teamID = 1;
