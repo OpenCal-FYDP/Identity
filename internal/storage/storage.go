@@ -69,9 +69,6 @@ func (s *Storage) GetTeam(req *rpc.GetTeamReq, res *rpc.GetTeamRes) error {
 			"teamID": {
 				S: aws.String(req.TeamID),
 			},
-			"teamName": {
-				S: aws.String(req.TeamName),
-			},
 		},
 	})
 
