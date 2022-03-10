@@ -17,6 +17,7 @@ func (i *IdentityService) GetUser(ctx context.Context, req *rpc.GetUserReq) (*rp
 		return nil, err
 	}
 	return res, nil
+
 }
 
 func (i *IdentityService) UpdateUser(ctx context.Context, req *rpc.UpdateUserReq) (*rpc.UpdateUserRes, error) {
