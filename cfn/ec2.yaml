@@ -253,7 +253,7 @@ Resources:
           #!/bin/bash -xe
           sudo apt-get install build-essential golang git
           export GOPATH=$HOME/go
-          git clone github.com/OpenCal-FYDP/Identity
+          git clone https://github.com/OpenCal-FYDP/Identity.git
           cd ./Identity
           go build
           ./Identity
