@@ -257,7 +257,6 @@ Resources:
             cd $GOPATH/src/github.com/OpenCal-FYDP/Identity
             go build
             ./Identity
-
   InstanceSecurityGroup:
     Type: AWS::EC2::SecurityGroup
     Properties:
