@@ -18,11 +18,13 @@ message GetUserReq {
 message GetUserRes {
   string email = 1;
   string username = 2;
+  string teamID = 3;
 }
 
 message UpdateUserReq {
   string email = 1;
   string username = 2;
+  string teamID = 3;
 }
 
 message UpdateUserRes {}

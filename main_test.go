@@ -26,6 +26,7 @@ func TestUpdateUser(t *testing.T) {
 	req := &rpc.UpdateUserReq{
 		Email:    "test1@gmail.com",
 		Username: "testMunch",
+		TeamID:   "testTeam",
 	}
 	res, err := client.UpdateUser(context.Background(), req)
 	if err != nil {
