@@ -251,8 +251,7 @@ Resources:
         Fn::Base64:
           !Sub |
           #!/bin/bash -xe
-          sudo apt-get install build-essential golang git
-          export GOPATH=$HOME/go
+          sudo yum install golang git -y
           git clone https://github.com/OpenCal-FYDP/Identity.git
           cd ./Identity
           go build
