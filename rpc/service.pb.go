@@ -138,6 +138,13 @@ func (x *GetUserRes) GetTeamID() string {
 	return ""
 }
 
+func (x *GetUserRes) GetTeamID() string {
+	if x != nil {
+		return x.TeamID
+	}
+	return ""
+}
+
 type UpdateUserReq struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -190,6 +197,13 @@ func (x *UpdateUserReq) GetEmail() string {
 func (x *UpdateUserReq) GetUsername() string {
 	if x != nil {
 		return x.Username
+	}
+	return ""
+}
+
+func (x *UpdateUserReq) GetTeamID() string {
+	if x != nil {
+		return x.TeamID
 	}
 	return ""
 }
