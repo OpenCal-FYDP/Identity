@@ -252,8 +252,9 @@ Resources:
           !Sub |
           !/bin/bash -xe
           sudo yum install golang git -y
-          git clone https://github.com/OpenCal-FYDP/Identity.git
-          cd ./Identity
+          export GOPATH=$HOME/go
+          go get github.com/OpenCal-FYDP/Identity
+          cd $GOPATH/src/github.com/OpenCal-FYDP/Identity
           go build
           ./Identity
 

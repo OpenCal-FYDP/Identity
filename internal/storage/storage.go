@@ -20,6 +20,8 @@ type Storage struct {
 func New() *Storage {
 	sess := session.Must(session.NewSessionWithOptions(session.Options{
 		SharedConfigState: session.SharedConfigEnable,
+		Config: aws.Config{
+			Region: aws.String("us-east-1")},
 	}))
 
 	client := dynamodb.New(sess)
