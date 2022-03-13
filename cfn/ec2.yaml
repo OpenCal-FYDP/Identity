@@ -232,9 +232,6 @@ Resources:
   EC2Instance:
     Type: AWS::EC2::Instance
     Properties:
-      Tags:
-        - Key: "Service"
-          Value: "Identity"
       InstanceType: 't2.nano'
       #      SecurityGroups: [!Ref 'InstanceSecurityGroup']
       #      KeyName: !Ref 'KeyName'
