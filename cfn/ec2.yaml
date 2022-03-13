@@ -214,14 +214,14 @@ Resources:
       GroupDescription: >-
         Enable HTTP access via port 8080 and 443 to the allowed CIDR
       SecurityGroupIngress:
-        - IpProtocol: tcp
+        - IpProtocol: -1
           FromPort: '8080'
           ToPort: '8080'
           CidrIp: !Ref PublicSGSource
-        - IpProtocol: tcp
-          FromPort: '443'
-          ToPort: '443'
-          CidrIp: !Ref PublicSGSource
+#        - IpProtocol: tcp
+#          FromPort: '443'
+#          ToPort: '443'
+#          CidrIp: !Ref PublicSGSource
   #      Tags:
   #        - Key: Name
   #          Value: !Join
@@ -251,6 +251,8 @@ Resources:
         Fn::Base64:
           !Sub |
             #!/bin/bash -xe
+            sudo yum install tmux -y
+            tmux
             sudo yum install golang git -y
             export GOPATH=$HOME/go
             go get github.com/OpenCal-FYDP/Identity
