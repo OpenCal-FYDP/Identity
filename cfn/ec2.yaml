@@ -251,15 +251,23 @@ Resources:
         Fn::Base64:
           !Sub |
             #!/bin/bash -xe
-            exec > >(tee /var/log/user-data.log|logger -t user-data -s 2>/dev/console) 2>&1
-            sudo yum install tmux -y
-            tmux
-            sudo yum install golang git -y
-            export GOPATH=$HOME/go
-            go get github.com/OpenCal-FYDP/Identity
-            cd $GOPATH/src/github.com/OpenCal-FYDP/Identity
-            go build
-            ./Identity
+            sudo yum install ruby git wget -y
+            CODEDEPLOY_BIN="/opt/codedeploy-agent/bin/codedeploy-agent"
+            $CODEDEPLOY_BIN stop
+            yum erase codedeploy-agent -y
+            wget https://aws-codedeploy-us-east-1.s3.us-east-1.amazonaws.com/latest/install
+            chmod +x ./install
+            sudo ./install auto
+            sudo service codedeploy-agent start
+            wget https://s3.amazonaws.com/aaronsilber/public/authbind-2.1.1-0.1.x86_64.rpm
+            sudo rpm -Uvh https://s3.amazonaws.com/aaronsilber/public/authbind-2.1.1-0.1.x86_64.rpm
+            sudo touch /etc/authbind/byport/80
+            sudo chmod 500 /etc/authbind/byport/80
+            sudo chown ec2-user /etc/authbind/byport/80
+            git clone https://github.com/OpenCal-FYDP/Identity.git
+            cd ./Identity
+            git pull
+
   InstanceSecurityGroup:
     Type: AWS::EC2::SecurityGroup
     Properties:
