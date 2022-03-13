@@ -251,12 +251,12 @@ Resources:
         Fn::Base64:
           !Sub |
             #!/bin/bash -xe
-            sudo yum install golang git -y
-            export GOPATH=$HOME/go
-            go get github.com/OpenCal-FYDP/Identity
-            cd $GOPATH/src/github.com/OpenCal-FYDP/Identity
-            go build
-            ./Identity
+          sudo yum install golang git -y
+          export GOPATH=$HOME/go
+          git clone https://github.com/OpenCal-FYDP/Identity.git
+          cd ./CalendarEventManagement
+          go build
+          ./Identity
   InstanceSecurityGroup:
     Type: AWS::EC2::SecurityGroup
     Properties:
