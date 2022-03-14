@@ -92,19 +92,62 @@ func (s *Storage) GetTeam(req *rpc.GetTeamReq, res *rpc.GetTeamRes) error {
 	return nil
 }
 
+// will not overwrite a user's token with an empty string but will just act like a normal put in all other cases
 func (s *Storage) UpdateUser(req *rpc.UpdateUserReq, res *rpc.UpdateUserRes) error {
+
+	// case for if a "" is passed in as a token, we dont want to risk accidentally overwriting a user's token
+	if string(req.GetOathToken()) == "" {
+
+		getReq := &rpc.GetUserReq{
+			Email:    req.GetEmail(),
+			Username: req.GetUsername(),
+		}
+		getRes := &rpc.GetUserRes{}
+		err := s.GetUser(getReq, getRes)
+		if err != nil {
+			if err.Error() == "key not found" {
+				req.OathToken = []byte("") // the item doesnt exist in the db yet and setting a blank token is fine
+			} else {
+				return err
+			}
+		} else {
+			// hard set the token
+			req.OathToken = getRes.GetOathToken()
+		}
+
+	}
+
+	// only overwrite oauthtoken if it hasnt been set yet. will prevent the case where we overwrite an existing token
+	//tokenDNE := expression.AttributeExists(expression.Name("oathToken"))
+	//upd := expression.Set(expression.Name("teamID"), expression.Value(req.GetTeamID()))
+	//expr, err := expression.NewBuilder().WithCondition(tokenDNE).WithUpdate(upd).Build()
+	//if err != nil {
+	//	return err
+	//}
+	//
+	//// Now create put item
+	//input := &dynamodb.UpdateItemInput{
+	//	Key: av,
+	//	ExpressionAttributeNames:  expr.Names(),
+	//	ExpressionAttributeValues: expr.Values(),
+	//	UpdateExpression:          expr.Update(),
+	//	TableName: aws.String(userTable),
+	//}
+	//
+	//// Now we update it into the database, then return
+	//_, err = s.client.UpdateItem(input)
+
+	//if token is a non empty string, its probably a real token and its safe to overwrite
 	av, err := dynamodbattribute.MarshalMap(req)
 
 	if err != nil {
 		return err
 	}
 
-	// Now create put item
 	input := &dynamodb.PutItemInput{
 		Item:      av,
 		TableName: aws.String(userTable),
 	}
-
 	// Now we push it into the database, then return
 	_, err = s.client.PutItem(input)
 

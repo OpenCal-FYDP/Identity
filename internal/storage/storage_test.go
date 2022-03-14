@@ -2,23 +2,23 @@ package storage
 
 import (
 	"github.com/OpenCal-FYDP/Identity/rpc"
-	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 	"testing"
 )
 
 func TestStorage(t *testing.T) {
 	s := New()
-	tokenAsBytes := []byte("ABC")
+	tokenAsBytes := []byte("")
 	email := "anEmail@gmail.com"
 	user := "aUser"
+	team := "newTeam"
 
 	t.Run("Update", func(t *testing.T) {
 
 		req := &rpc.UpdateUserReq{
 			Email:     email,
 			Username:  user,
-			TeamID:    "aTeam",
+			TeamID:    team,
 			OathToken: tokenAsBytes,
 		}
 
@@ -43,6 +43,6 @@ func TestStorage(t *testing.T) {
 		//err = json.Unmarshal(res.GetOathToken(), token)
 		//require.NoError(t, err)
 
-		assert.Equal(t, tokenAsBytes, res.GetOathToken())
+		//assert.Equal(t, tokenAsBytes, res.GetOathToken())
 	})
 }
